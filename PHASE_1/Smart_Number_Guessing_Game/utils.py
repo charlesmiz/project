@@ -1,7 +1,7 @@
-def get_valid_guess(min_num, max_num):
+def get_valid_guess(min_num, max_num,attempts,max_attempts ):
     while True: 
         try:
-         guess = int(input("Please pick a valid number: "))
+         guess = int(input(f"Attempt {attempts+1}/{max_attempts} — Enter your guess: "))
          if  guess < min_num or guess > max_num :
              print("Number is out of range")
          else:
@@ -13,34 +13,19 @@ def get_valid_guess(min_num, max_num):
         
 def choose_difficulty() :
     
-    # difficulties = {
-    #     "1":(1,50,10),
-    #     "2":(1,100,7),
-    #     "3":(1,200,5)
-    # }
+    difficulties = {
+        "1":(1,50,10,"Easy"),
+        "2":(1,100,7,"Medium"),
+        "3":(1,200,5,"Hard")
+    }
     
     while True:
-        print("1. Easy")
-        print("2. Medium")        
-        print("3. Hard")
-    
-        try:
-            choice = input("choose difficulty: ").strip()
-            
-            if choice == 1:
-                return (1,50,10)
-                
-            elif choice == 2:
-                return(1,100,7)
-            elif choice == 3:
-                return(1,200,5)
-            else:
-                print("Pick between 1-3")
-                print()
-        except ValueError:
-            print("Enter correct value")
-            print()
-             
+        choice = (input("Select difficulty:[1] Easy  [2] Medium  [3] Hard \n = ").strip())             
+        if choice in difficulties:
+            return difficulties[choice]
+        else:
+            print("Enter correct value [1]or[2]or[3]\n")
+        
 
 def score_calculator(max_attempts,attempts_used):
     attempts_remaining = max_attempts - attempts_used +1
